@@ -1,7 +1,5 @@
+Feature: Cart
 
-
-Feature: My Demo App
-
-  Scenario: Open My Demo App
+  Scenario: Open the cart
     Given the application is open
     When I open the cart

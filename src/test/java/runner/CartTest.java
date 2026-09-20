@@ -9,8 +9,7 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 
 @Suite
 @IncludeEngines("cucumber")
-@SelectClasspathResource("features")
-@ConfigurationParameter(key = GLUE_PROPERTY_NAME,value = "app,hooks"
-)
-public class RunCucumberTest {
+@SelectClasspathResource("features/cart")
+@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "cart,hooks")
+public class CartTest {
 }

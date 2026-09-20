@@ -1,16 +1,14 @@
-package app;
+package cart;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.AppiumBy;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 
-public class AppPage {
+public class CartPage {
 
     private final AndroidDriver driver;
 
-    public AppPage(AndroidDriver driver) {
+    public CartPage(AndroidDriver driver) {
         this.driver = driver;
 
     }

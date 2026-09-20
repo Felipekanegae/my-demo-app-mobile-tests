@@ -1,15 +1,16 @@
-package app;
+package cart;
 
 import driver.DriverManager;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 
-public class AppSteps {
+public class CartSteps {
 
     private final DriverManager driverManager;
 
-    public AppSteps(DriverManager driverManager) {
+    public CartSteps(DriverManager driverManager) {
         this.driverManager = driverManager;
+
     }
 
     @Given("the application is open")
@@ -19,8 +20,9 @@ public class AppSteps {
 
     @When("I open the cart")
     public void iOpenTheCart() {
-        AppPage appPage = new AppPage(driverManager.getDriver());
-        appPage.openCart();
+        CartPage cartPage = new CartPage(driverManager.getDriver());
+        cartPage.openCart();
+
     }
 
 }
