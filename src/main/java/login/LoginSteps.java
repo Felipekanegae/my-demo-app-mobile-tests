@@ -37,4 +37,16 @@ public class LoginSteps {
 
     }
 
+    @When("I login without email and password")
+    public void i_login_without_email_and_password() {
+        login.login();
+
+    }
+
+    @Then("the message {string} should be displayed")
+    public void the_message_should_be_displayed(String message) {
+        login.validateUserNameError(message);
+
+    }
+
 }

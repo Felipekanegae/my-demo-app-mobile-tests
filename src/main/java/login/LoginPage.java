@@ -32,6 +32,7 @@ public class LoginPage {
     private final By menuLogOut = AppiumBy.androidUIAutomator("new UiSelector().text(\"Log Out\")");
     private final By userNameFiled = AppiumBy.id("com.saucelabs.mydemoapp.android:id/nameET");
     private final By passwordFiled = AppiumBy.id("com.saucelabs.mydemoapp.android:id/passwordET");
+    private final By userNameError = AppiumBy.id("com.saucelabs.mydemoapp.android:id/nameErrorTV");
 
     //===ACTIONS===
 
@@ -53,8 +54,6 @@ public class LoginPage {
 
     }
 
-
-
     //===FORM FILLING===
     private void fillUserCredentials() {
         AndroidDriver driver = driverManager.getDriver();
@@ -74,6 +73,16 @@ public class LoginPage {
 
         wait.until(ExpectedConditions.elementToBeClickable(menuButton)).click();
         assertThat(wait.until(ExpectedConditions.visibilityOfElementLocated(menuLogOut)).isDisplayed()).isTrue();
+
+    }
+
+    public void validateUserNameError(String message) {
+        AndroidDriver driver = driverManager.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(userNameError)));
+        String errorMessage = driver.findElement(userNameError).getText();
+        assertThat(errorMessage).isEqualTo(message);
 
     }
 
