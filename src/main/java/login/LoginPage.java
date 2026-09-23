@@ -26,13 +26,32 @@ public class LoginPage {
     }
 
     // ===ELEMENTS===
-    private final By menuButton = AppiumBy.id("com.saucelabs.mydemoapp.android:id/menuIV");
-    private final By loginButton = AppiumBy.id("com.saucelabs.mydemoapp.android:id/loginBtn");
-    private final By menuLogin = AppiumBy.androidUIAutomator("new UiSelector().text(\"Log In\")");
-    private final By menuLogOut = AppiumBy.androidUIAutomator("new UiSelector().text(\"Log Out\")");
-    private final By userNameFiled = AppiumBy.id("com.saucelabs.mydemoapp.android:id/nameET");
-    private final By passwordFiled = AppiumBy.id("com.saucelabs.mydemoapp.android:id/passwordET");
-    private final By userNameError = AppiumBy.id("com.saucelabs.mydemoapp.android:id/nameErrorTV");
+    private final By menuButton = AppiumBy.id(
+            "com.saucelabs.mydemoapp.android:id/menuIV");
+
+    private final By loginButton = AppiumBy.id(
+            "com.saucelabs.mydemoapp.android:id/loginBtn");
+
+    private final By logoutButton = AppiumBy.id(
+            "android:id/button1");
+
+    private final By menuLogin = AppiumBy.androidUIAutomator(
+            "new UiSelector().text(\"Log In\")");
+
+    private final By menuLogOut = AppiumBy.androidUIAutomator(
+            "new UiSelector().text(\"Log Out\")");
+
+    private final By userNameFiled = AppiumBy.id(
+            "com.saucelabs.mydemoapp.android:id/nameET");
+
+    private final By passwordFiled = AppiumBy.id(
+            "com.saucelabs.mydemoapp.android:id/passwordET");
+
+    private final By userNameError = AppiumBy.id(
+            "com.saucelabs.mydemoapp.android:id/nameErrorTV");
+
+    private final By logoutMessage = AppiumBy.id(
+            "android:id/message");
 
     //===ACTIONS===
 
@@ -54,6 +73,17 @@ public class LoginPage {
 
     }
 
+    public void logout(){
+        AndroidDriver driver = driverManager.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(ExpectedConditions.elementToBeClickable(menuButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(menuLogOut)).click();
+        validateLogoutMessage();
+        driver.findElement(logoutButton).click();
+
+    }
+
     //===FORM FILLING===
     private void fillUserCredentials() {
         AndroidDriver driver = driverManager.getDriver();
@@ -72,7 +102,8 @@ public class LoginPage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         wait.until(ExpectedConditions.elementToBeClickable(menuButton)).click();
-        assertThat(wait.until(ExpectedConditions.visibilityOfElementLocated(menuLogOut)).isDisplayed()).isTrue();
+        assertThat(wait.until(ExpectedConditions.visibilityOfElementLocated(
+                menuLogOut)).isDisplayed()).isTrue();
 
     }
 
@@ -84,6 +115,29 @@ public class LoginPage {
         String errorMessage = driver.findElement(userNameError).getText();
         assertThat(errorMessage).isEqualTo(message);
 
+    }
+
+    public void validateLoginPage() {
+        AndroidDriver driver = driverManager.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(userNameFiled)));
+
+        assertThat(wait.until(ExpectedConditions.visibilityOfElementLocated(
+                userNameFiled)).isDisplayed()).isTrue();
+        assertThat(wait.until(ExpectedConditions.visibilityOfElementLocated(
+                passwordFiled)).isDisplayed()).isTrue();
+
+    }
+
+    private void validateLogoutMessage() {
+        AndroidDriver driver = driverManager.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(logoutMessage));
+        String message = driver.findElement(logoutMessage).getText();
+
+        assertThat(message).isEqualTo("Are you sure you want to logout");
     }
 
 }
