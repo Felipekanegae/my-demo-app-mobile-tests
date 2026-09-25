@@ -7,14 +7,9 @@ import testData.ExcelTestData;
 
 public class LoginSteps {
 
-    private final ExcelTestData testData;
-
     private LoginPage login;
 
-    public LoginSteps(LoginPage login,
-                      ExcelTestData testData) {
-
-        this.testData = testData;
+    public LoginSteps(LoginPage login) {
         this.login = login;
 
     }

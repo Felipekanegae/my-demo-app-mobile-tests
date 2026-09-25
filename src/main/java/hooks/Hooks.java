@@ -4,7 +4,6 @@ import driver.DriverManager;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
-import login.LoginPage;
 import testData.ExcelTestData;
 
 import java.net.MalformedURLException;
@@ -42,6 +41,7 @@ public class Hooks {
 
     @After
     public void afterScenario() {
+
         driverManager.quitDriver();
     }
 }
