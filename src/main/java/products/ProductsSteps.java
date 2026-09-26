@@ -43,4 +43,16 @@ public class ProductsSteps {
 
     }
 
+    @When("I sort the products by price - ascending")
+    public void i_sort_the_products_by_price_ascending() {
+        products.sortProducts();
+
+    }
+
+    @Then("the price ascending sort option should be selected")
+    public void the_price_ascending_sort_option_should_be_selected() {
+        products.validateSortIsSelected();
+
+    }
+
 }
