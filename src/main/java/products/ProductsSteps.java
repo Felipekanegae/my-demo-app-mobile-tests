@@ -26,8 +26,19 @@ public class ProductsSteps {
 
     }
 
-    @Then("Then the name ascending sort option should be selected")
+    @Then("the name ascending sort option should be selected")
     public void then_the_name_ascending_sort_option_should_be_selected() {
+        products.validateSortIsSelected();
+
+    }
+
+    @When("I sort the products by name - descending")
+    public void i_sort_the_products_by_name_descending() {
+        products.sortProducts();
+    }
+
+    @Then("the name descending sort option should be selected")
+    public void the_name_descending_sort_option_should_be_selected() {
         products.validateSortIsSelected();
 
     }
