@@ -55,4 +55,16 @@ public class ProductsSteps {
 
     }
 
+    @When("I sort the products by price - descending")
+    public void i_sort_the_products_by_price_descending() {
+        products.sortProducts();
+
+    }
+
+    @Then("the price descending sort option should be selected")
+    public void the_price_descending_sort_option_should_be_selected() {
+        products.validateSortIsSelected();
+
+    }
+
 }

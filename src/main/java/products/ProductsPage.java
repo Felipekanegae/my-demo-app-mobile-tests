@@ -3,17 +3,14 @@ package products;
 import driver.DriverManager;
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import testData.ExcelTestData;
 
 import java.time.Duration;
-import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class ProductsPage {
