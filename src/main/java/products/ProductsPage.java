@@ -32,6 +32,12 @@ public class ProductsPage {
     private final By catalogButton = AppiumBy.androidUIAutomator(
             "new UiSelector().text(\"Catalog\")");
 
+    private By productItem(String productName) {
+        return AppiumBy.xpath(
+                "//android.widget.TextView[@text='" + productName + "']" +
+                        "/../android.widget.ImageView[@resource-id='com.saucelabs.mydemoapp.android:id/productIV']");
+    }
+
     private final By nameAscendingButton = AppiumBy.androidUIAutomator(
             "new UiSelector().text(\"Name - Ascending\")");
 
@@ -50,8 +56,8 @@ public class ProductsPage {
     private final By productsLabel = AppiumBy.id(
             "com.saucelabs.mydemoapp.android:id/productTV");
 
-    private final By sortBox = AppiumBy.id(
-            "new UiSelector().className(\"android.view.ViewGroup\").instance(0)");
+    private final By productsHighlights = AppiumBy.id(
+            "com.saucelabs.mydemoapp.android:id/descTV");
 
     private final By tickNameAscending = AppiumBy.id(
             "com.saucelabs.mydemoapp.android:id/tickNameAscIV");
@@ -119,6 +125,17 @@ public class ProductsPage {
 
     }
 
+    public void addProductToCart() {
+        AndroidDriver driver = driverManager.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        String productName = testData.getStringOf("PRODUCT_NAME");
+
+        wait.until(ExpectedConditions.elementToBeClickable(
+                productItem(productName))).click();
+
+    }
+
     //===VALIDATIONS===
 
     public void validateProductsPage() {
@@ -165,4 +182,23 @@ public class ProductsPage {
         }
     }
 
+    public void validateProductsHighlights() {
+
+        AndroidDriver driver = driverManager.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        assertThat(wait.until(ExpectedConditions.visibilityOfElementLocated(
+                productsLabel)).isDisplayed()).isTrue();
+
+        String productName = driver.findElement(productsLabel).getText();
+        assertThat(productName).isEqualTo(testData.getStringOf("PRODUCT_NAME"));
+
+        driver.findElement(AppiumBy.androidUIAutomator(
+                "new UiScrollable(new UiSelector().scrollable(true))" +
+                        ".scrollIntoView(new UiSelector().resourceId(" +
+                        "\"com.saucelabs.mydemoapp.android:id/descTV\"))"));
+
+        assertThat(wait.until(ExpectedConditions.visibilityOfElementLocated(
+                productsHighlights)).isDisplayed()).isTrue();
+    }
 }

@@ -34,13 +34,14 @@ public class ProductsSteps {
 
     @When("I sort the products by name - descending")
     public void i_sort_the_products_by_name_descending() {
+
         products.sortProducts();
     }
 
     @Then("the name descending sort option should be selected")
     public void the_name_descending_sort_option_should_be_selected() {
-        products.validateSortIsSelected();
 
+        products.validateSortIsSelected();
     }
 
     @When("I sort the products by price - ascending")
@@ -51,20 +52,32 @@ public class ProductsSteps {
 
     @Then("the price ascending sort option should be selected")
     public void the_price_ascending_sort_option_should_be_selected() {
-        products.validateSortIsSelected();
 
+        products.validateSortIsSelected();
     }
 
     @When("I sort the products by price - descending")
     public void i_sort_the_products_by_price_descending() {
-        products.sortProducts();
 
+        products.sortProducts();
     }
 
     @Then("the price descending sort option should be selected")
     public void the_price_descending_sort_option_should_be_selected() {
-        products.validateSortIsSelected();
 
+        products.validateSortIsSelected();
+    }
+
+    @When("I select a product")
+    public void i_select_a_product() {
+
+        products.addProductToCart();
+    }
+
+    @Then("the product details should be displayed")
+    public void the_product_details_should_be_displayed() {
+
+        products.validateProductsHighlights();
     }
 
 }

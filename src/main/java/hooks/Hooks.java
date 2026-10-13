@@ -34,8 +34,8 @@ public class Hooks {
         driverManager.selectDevice();
 
         testData.loadTestData(
-                "src/test/resources/testData/testData.xlsx",
-                "testData", ct);
+                "src/test/resources/testData/testData_Appium_myDemoApp.xlsx",
+                "testData_Appium_myDemoApp", ct);
 
     }
 
