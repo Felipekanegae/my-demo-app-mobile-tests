@@ -38,6 +38,16 @@ public class ProductsPage {
                         "/../android.widget.ImageView[@resource-id='com.saucelabs.mydemoapp.android:id/productIV']");
     }
 
+    private By productColor(String productColor) {
+        return AppiumBy.accessibilityId(productColor);
+    }
+
+    private By selectedProductColor(String productColor) {
+        return AppiumBy.xpath(
+                "//android.widget.ImageView[@content-desc='" + productColor + "']" +
+                        "/../android.widget.ImageView[@resource-id='com.saucelabs.mydemoapp.android:id/aroundIV']");
+    }
+
     private final By nameAscendingButton = AppiumBy.androidUIAutomator(
             "new UiSelector().text(\"Name - Ascending\")");
 
@@ -125,7 +135,7 @@ public class ProductsPage {
 
     }
 
-    public void addProductToCart() {
+    public void openProductPage() {
         AndroidDriver driver = driverManager.getDriver();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
@@ -133,6 +143,17 @@ public class ProductsPage {
 
         wait.until(ExpectedConditions.elementToBeClickable(
                 productItem(productName))).click();
+
+    }
+
+    public void selectProductColor() {
+        AndroidDriver driver = driverManager.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        String color =  testData.getStringOf("PRODUCT_COLOR");
+
+        wait.until(ExpectedConditions.elementToBeClickable(productColor
+                (color))).click();
 
     }
 
@@ -200,5 +221,16 @@ public class ProductsPage {
 
         assertThat(wait.until(ExpectedConditions.visibilityOfElementLocated(
                 productsHighlights)).isDisplayed()).isTrue();
+    }
+
+    public void validateColorSelected() {
+        AndroidDriver driver = driverManager.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        String color =  testData.getStringOf("PRODUCT_COLOR");
+
+        assertThat(wait.until(ExpectedConditions.visibilityOfElementLocated(
+                selectedProductColor(color))).isDisplayed()).isTrue();
+
     }
 }
