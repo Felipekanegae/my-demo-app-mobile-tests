@@ -18,7 +18,8 @@ public class ProductsPage {
     private final DriverManager driverManager;
     private final ExcelTestData testData;
 
-    public ProductsPage(DriverManager driverManager, ExcelTestData testData) {
+    public ProductsPage(DriverManager driverManager,
+                        ExcelTestData testData) {
         this.driverManager = driverManager;
         this.testData = testData;
 
