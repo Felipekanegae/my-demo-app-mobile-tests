@@ -64,4 +64,22 @@ public class CartSteps {
     public void the_product_should_be_removed_from_the_cart() {
         cart.validateCartEmpty();
     }
+
+    @Given("I have added multiple units of a product to the cart")
+    public void i_have_added_multiple_units_of_a_product_to_the_cart() {
+        products.openProductPage();
+        cart.plusProduct();
+        cart.addProduct();
+    }
+
+    @When("I open the cart page")
+    public void i_open_the_cart_page() {
+        cart.openCart();
+    }
+
+    @Then("the total should be displayed correctly")
+    public void the_total_should_be_displayed_correctly() {
+        cart.validateQuantityOnCartPage();
+        cart.validateTotalPriceOnCartPage();
+    }
 }

@@ -84,14 +84,7 @@ public class ProductsPage {
 
 
     //===ACTIONS===
-    public void openCatalog() {
-        AndroidDriver driver = driverManager.getDriver();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        wait.until(ExpectedConditions.elementToBeClickable(menuButton)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(catalogButton)).click();
-
-    }
 
     public void sortProducts() {
         AndroidDriver driver = driverManager.getDriver();
