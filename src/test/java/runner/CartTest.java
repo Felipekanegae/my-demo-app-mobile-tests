@@ -12,7 +12,7 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 @IncludeEngines("cucumber")
 @SelectClasspathResource("features/cart")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "cart,hooks")
-@ConfigurationParameter(key = FILTER_TAGS_PROPERTY_NAME, value = "@CT012")
+@ConfigurationParameter(key = FILTER_TAGS_PROPERTY_NAME, value = "@CT013")
 
 public class CartTest {
 }

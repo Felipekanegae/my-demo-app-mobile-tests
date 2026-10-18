@@ -47,4 +47,21 @@ public class CartSteps {
         cart.validateProductColorOnCartPage();
 
     }
+
+    @Given("I am on the cart page")
+    public void i_am_on_the_cart_page() {
+        products.openProductPage();
+        cart.addProduct();
+        cart.openCart();
+    }
+
+    @When("I remove a product from the cart")
+    public void i_remove_a_product_from_the_cart() {
+        cart.removeProduct();
+    }
+
+    @Then("the product should be removed from the cart")
+    public void the_product_should_be_removed_from_the_cart() {
+        cart.validateCartEmpty();
+    }
 }

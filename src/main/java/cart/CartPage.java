@@ -32,11 +32,18 @@ public class CartPage {
     private final By addButton = AppiumBy.id(
             "com.saucelabs.mydemoapp.android:id/cartBt");
 
+    private final By removeButton = AppiumBy.id(
+            "com.saucelabs.mydemoapp.android:id/removeBt");
+
     private final By productLabel = AppiumBy.id(
             "com.saucelabs.mydemoapp.android:id/titleTV");
 
     private final By productColor = AppiumBy.id(
             "com.saucelabs.mydemoapp.android:id/colorIV");
+
+    private final By cartNoItemsMessage = AppiumBy.androidUIAutomator(
+            "new UiSelector().text(" +
+                    "\"Oh no! Your cart is empty. Fill it up with swag to complete your purchase.\")");
 
 
     //===ACTIONS===
@@ -45,6 +52,14 @@ public class CartPage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         wait.until(ExpectedConditions.elementToBeClickable(addButton)).click();
+
+    }
+
+    public void removeProduct() {
+        AndroidDriver driver = driverManager.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(ExpectedConditions.elementToBeClickable(removeButton)).click();
 
     }
 
@@ -75,4 +90,11 @@ public class CartPage {
 
     }
 
+    public void validateCartEmpty() {
+        AndroidDriver driver = driverManager.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        assertThat(wait.until(ExpectedConditions.visibilityOfElementLocated(
+                cartNoItemsMessage)).isDisplayed()).isTrue();
+    }
 }
