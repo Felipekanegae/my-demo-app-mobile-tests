@@ -147,6 +147,17 @@ public class ProductsPage {
 
     }
 
+    public void openSecondProductPage() {
+        AndroidDriver driver = driverManager.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        String productName = testData.getStringOf("PRODUCT_NAME_2");
+
+        wait.until(ExpectedConditions.elementToBeClickable(
+                productItem(productName))).click();
+
+    }
+
     public void selectProductColor() {
         AndroidDriver driver = driverManager.getDriver();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

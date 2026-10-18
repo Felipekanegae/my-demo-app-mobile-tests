@@ -1,6 +1,5 @@
 package cart;
 
-import driver.DriverManager;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -9,17 +8,14 @@ import login.LoginPage;
 
 public class CartSteps {
 
-    private final DriverManager driverManager;
     private CartPage cart;
     private ProductsPage products;
     private LoginPage login;
 
 
-    public CartSteps(DriverManager driverManager,
-                     CartPage cart,
+    public CartSteps(CartPage cart,
                      ProductsPage products,
                      LoginPage login) {
-        this.driverManager = driverManager;
         this.cart = cart;
         this.products = products;
         this.login = login;
@@ -33,6 +29,7 @@ public class CartSteps {
 
     @When("I add a product to the cart")
     public void i_add_a_product_to_the_cart() {
+        products.selectProductColor();
         cart.addProduct();
 
     }
@@ -40,7 +37,14 @@ public class CartSteps {
     @Then("the product should be in the cart")
     public void the_product_should_be_in_the_cart() {
         cart.openCart();
-        cart.validateProductsOnCartPage();
+        cart.validateProductOnCartPage();
+
+    }
+
+    @Then("the product color should be displayed in the cart")
+    public void the_product_color_should_be_displayed_in_the_cart() {
+        cart.openCart();
+        cart.validateProductColorOnCartPage();
 
     }
 }
