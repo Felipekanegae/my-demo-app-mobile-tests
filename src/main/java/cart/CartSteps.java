@@ -8,9 +8,8 @@ import login.LoginPage;
 
 public class CartSteps {
 
-    private CartPage cart;
-    private ProductsPage products;
-    private LoginPage login;
+    private final CartPage cart;
+    private final ProductsPage products;
 
 
     public CartSteps(CartPage cart,
@@ -18,7 +17,6 @@ public class CartSteps {
                      LoginPage login) {
         this.cart = cart;
         this.products = products;
-        this.login = login;
     }
 
     @Given("I am on the products page")

@@ -85,7 +85,6 @@ public class ProductsPage {
 
     //===ACTIONS===
 
-
     public void sortProducts() {
         AndroidDriver driver = driverManager.getDriver();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

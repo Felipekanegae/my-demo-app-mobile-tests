@@ -6,7 +6,6 @@ import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import products.ProductsPage;
 import testData.ExcelTestData;
 
 import java.math.BigDecimal;
