@@ -46,4 +46,23 @@ public class CheckoutSteps {
         checkout.validateAddressError(message);
     }
 
+    @Given("I am on the payment page")
+    public void i_am_on_the_payment_page() {
+        products.openProductPage();
+        cart.addProduct();
+        cart.openCart();
+        checkout.proceedToCheckout();
+        login.login();
+        checkout.checkout();
+    }
+
+    @When("I try to continue without a payment method")
+    public void i_try_to_continue_without_a_payment_method() {
+        checkout.payment();
+    }
+
+    @Then("the message {string} should be displayed on the payment page")
+    public void the_message_should_be_displayed_on_the_payment_page(String message) {
+        checkout.validatePaymentError(message);
+    }
 }

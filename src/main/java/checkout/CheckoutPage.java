@@ -34,6 +34,21 @@ public class CheckoutPage {
     private final By fullNameField = AppiumBy.id(
             "com.saucelabs.mydemoapp.android:id/fullNameET");
 
+    private final By fullNamePaymentField = AppiumBy.id(
+            "com.saucelabs.mydemoapp.android:id/nameET");
+
+    private final By cardNumberField = AppiumBy.id(
+            "com.saucelabs.mydemoapp.android:id/cardNumberET");
+
+    private final By expirationField = AppiumBy.id(
+            "com.saucelabs.mydemoapp.android:id/expirationDateET");
+
+    private final By securityCodeField = AppiumBy.id(
+            "com.saucelabs.mydemoapp.android:id/securityCodeET");
+
+    private final By reviewOrderButton = AppiumBy.id(
+            "com.saucelabs.mydemoapp.android:id/paymentBtn");
+
     private final By addressFieldOne = AppiumBy.id(
             "com.saucelabs.mydemoapp.android:id/address1ET");
 
@@ -52,6 +67,9 @@ public class CheckoutPage {
     private final By addressErrorMessage = AppiumBy.id(
             "com.saucelabs.mydemoapp.android:id/address1ErrorTV");
 
+    private final By paymentErrorMessage = AppiumBy.id(
+            "com.saucelabs.mydemoapp.android:id/expirationDateErrorTV");
+
 
     //===ACTIONS===
 
@@ -67,6 +85,13 @@ public class CheckoutPage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         fillCheckoutForm();
         wait.until(ExpectedConditions.elementToBeClickable(toPaymentButton)).click();
+    }
+
+    public void payment() {
+        AndroidDriver driver = driverManager.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        fillPaymentForm();
+        wait.until(ExpectedConditions.elementToBeClickable(reviewOrderButton)).click();
     }
 
     //===FORM FILLING===
@@ -86,6 +111,21 @@ public class CheckoutPage {
                 testData.getStringOf("COUNTRY"));
     }
 
+    private void fillPaymentForm() {
+        AndroidDriver driver = driverManager.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(fullNamePaymentField))).sendKeys(
+                testData.getStringOf("FULL_NAME"));
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(cardNumberField))).sendKeys(
+                testData.getStringOf("CARD_NUMBER"));
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(expirationField))).sendKeys(
+                testData.getStringOf("EXPIRATION_DATE"));
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(securityCodeField))).sendKeys(
+                testData.getStringOf("SECURITY_CODE"));
+
+    }
+
     //===VALIDATIONS===
 
     public void validateAddressError(String message) {
@@ -94,6 +134,16 @@ public class CheckoutPage {
 
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(addressErrorMessage)));
         String errorMessage = driver.findElement(addressErrorMessage).getText();
+        assertThat(errorMessage).isEqualTo(message);
+
+    }
+
+    public void validatePaymentError(String message) {
+        AndroidDriver driver = driverManager.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(paymentErrorMessage)));
+        String errorMessage = driver.findElement(paymentErrorMessage).getText();
         assertThat(errorMessage).isEqualTo(message);
 
     }

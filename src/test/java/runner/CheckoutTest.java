@@ -12,7 +12,7 @@ import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
 @IncludeEngines("cucumber")
 @SelectClasspathResource("features/checkout")
 @ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "checkout,hooks")
-@ConfigurationParameter(key = FILTER_TAGS_PROPERTY_NAME, value = "@CT015")
+@ConfigurationParameter(key = FILTER_TAGS_PROPERTY_NAME, value = "@CT016")
 
 public class CheckoutTest {
 
