@@ -89,9 +89,9 @@ public class LoginPage {
         AndroidDriver driver = driverManager.getDriver();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(userNameFiled))).sendKeys(
+        wait.until(ExpectedConditions.visibilityOfElementLocated(userNameFiled)).sendKeys(
                 testData.getStringOf("USER_NAME"));
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(passwordFiled))).sendKeys(
+        wait.until(ExpectedConditions.visibilityOfElementLocated(passwordFiled)).sendKeys(
                 testData.getStringOf("PASSWORD"));
 
     }

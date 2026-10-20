@@ -64,11 +64,17 @@ public class CheckoutPage {
     private final By toPaymentButton = AppiumBy.id(
             "com.saucelabs.mydemoapp.android:id/paymentBtn");
 
+    private final By placeOrderButton = AppiumBy.id(
+            "com.saucelabs.mydemoapp.android:id/paymentBtn");
+
     private final By addressErrorMessage = AppiumBy.id(
             "com.saucelabs.mydemoapp.android:id/address1ErrorTV");
 
     private final By paymentErrorMessage = AppiumBy.id(
             "com.saucelabs.mydemoapp.android:id/expirationDateErrorTV");
+
+    private final By thankYouMessage = AppiumBy.id(
+            "com.saucelabs.mydemoapp.android:id/thankYouTV");
 
 
     //===ACTIONS===
@@ -94,20 +100,26 @@ public class CheckoutPage {
         wait.until(ExpectedConditions.elementToBeClickable(reviewOrderButton)).click();
     }
 
+    public void placeOrder() {
+        AndroidDriver driver = driverManager.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(placeOrderButton)).click();
+    }
+
     //===FORM FILLING===
     private void fillCheckoutForm() {
         AndroidDriver driver = driverManager.getDriver();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(fullNameField))).sendKeys(
+        wait.until(ExpectedConditions.visibilityOfElementLocated(fullNameField)).sendKeys(
                 testData.getStringOf("FULL_NAME"));
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(addressFieldOne))).sendKeys(
+        wait.until(ExpectedConditions.visibilityOfElementLocated(addressFieldOne)).sendKeys(
                 testData.getStringOf("ADDRESS"));
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(cityField))).sendKeys(
+        wait.until(ExpectedConditions.visibilityOfElementLocated(cityField)).sendKeys(
                 testData.getStringOf("CITY"));
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(zipCodeField))).sendKeys(
+        wait.until(ExpectedConditions.visibilityOfElementLocated(zipCodeField)).sendKeys(
                 testData.getStringOf("ZIPCODE"));
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(countryField))).sendKeys(
+        wait.until(ExpectedConditions.visibilityOfElementLocated(countryField)).sendKeys(
                 testData.getStringOf("COUNTRY"));
     }
 
@@ -115,13 +127,13 @@ public class CheckoutPage {
         AndroidDriver driver = driverManager.getDriver();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(fullNamePaymentField))).sendKeys(
+        wait.until(ExpectedConditions.visibilityOfElementLocated(fullNamePaymentField)).sendKeys(
                 testData.getStringOf("FULL_NAME"));
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(cardNumberField))).sendKeys(
+        wait.until(ExpectedConditions.visibilityOfElementLocated(cardNumberField)).sendKeys(
                 testData.getStringOf("CARD_NUMBER"));
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(expirationField))).sendKeys(
+        wait.until(ExpectedConditions.visibilityOfElementLocated(expirationField)).sendKeys(
                 testData.getStringOf("EXPIRATION_DATE"));
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(securityCodeField))).sendKeys(
+        wait.until(ExpectedConditions.visibilityOfElementLocated(securityCodeField)).sendKeys(
                 testData.getStringOf("SECURITY_CODE"));
 
     }
@@ -132,7 +144,7 @@ public class CheckoutPage {
         AndroidDriver driver = driverManager.getDriver();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(addressErrorMessage)));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(addressErrorMessage));
         String errorMessage = driver.findElement(addressErrorMessage).getText();
         assertThat(errorMessage).isEqualTo(message);
 
@@ -142,10 +154,19 @@ public class CheckoutPage {
         AndroidDriver driver = driverManager.getDriver();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(paymentErrorMessage)));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(paymentErrorMessage));
         String errorMessage = driver.findElement(paymentErrorMessage).getText();
         assertThat(errorMessage).isEqualTo(message);
 
+    }
+
+    public void validateThankYouMessage(String message) {
+        AndroidDriver driver = driverManager.getDriver();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(thankYouMessage));
+        String thanksMessage = driver.findElement(thankYouMessage).getText();
+        assertThat(thanksMessage).isEqualTo(message);
     }
 
 }

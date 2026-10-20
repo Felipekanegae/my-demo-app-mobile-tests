@@ -65,4 +65,25 @@ public class CheckoutSteps {
     public void the_message_should_be_displayed_on_the_payment_page(String message) {
         checkout.validatePaymentError(message);
     }
+
+    @Given("I am on the review page")
+    public void i_am_on_the_review_page() {
+        products.openProductPage();
+        cart.addProduct();
+        cart.openCart();
+        checkout.proceedToCheckout();
+        login.login();
+        checkout.checkout();
+        checkout.payment();
+    }
+
+    @When("I place my order")
+    public void i_place_my_order() {
+        checkout.placeOrder();
+    }
+
+    @Then("the message {string} should be displayed on the checkout complete page")
+    public void the_message_should_be_displayed_on_the_checkout_complete_page(String message) {
+        checkout.validateThankYouMessage(message);
+    }
 }
